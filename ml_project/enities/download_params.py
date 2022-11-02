@@ -3,4 +3,6 @@ from dataclasses import dataclass
 
 @dataclass
 class DownloadParams:
-    pass
+    paths: list[str]
+    output_folder: str
+    s3_bucket: str

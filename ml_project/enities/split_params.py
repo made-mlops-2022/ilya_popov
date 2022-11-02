@@ -1,8 +1,8 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 
 @dataclass()
 class SplittingParams:
-    test_size: float = field(default=0.2)
-    random_state: int = field(default=13)
-    shuffle: bool = field(default=True)
+    test_size: float = 0.2
+    random_state: int = 44
+    shuffle: bool = True

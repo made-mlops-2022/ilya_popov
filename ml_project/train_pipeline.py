@@ -18,15 +18,16 @@ def run_train_pipeline(training_params: TrainingPipelineParams):
 
     y_train = extract_target(train_data, training_params.feature_params)
     y_test = extract_target(test_data, training_params.feature_params)
-    x_train = train_data.drop(training_params.feature_params.target_col)
-    x_test = test_data.drop(training_params.feature_params.target_col)
+    # print(train_data.columns)
+    x_train = train_data.drop(columns=training_params.feature_params.target_col)
+    x_test = test_data.drop(columns=training_params.feature_params.target_col)
 
     transformer = build_transformer(training_params.feature_params)
     transformer.fit(x_train)
 
     train_features = make_features(transformer, x_train)
 
-    model = train_model(train_features, y_train, training_params)
+    model = train_model(train_features, y_train, training_params.train_params)
     model_pipeline = make_model_pipeline(model, transformer)
 
     predicts = predict_model(x_test, model_pipeline)

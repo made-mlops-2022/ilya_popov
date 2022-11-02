@@ -8,7 +8,7 @@ downloading_params:
     - test.csv
   output_folder: "data/raw/"
 splitting_params:
-  val_size: 0.2
+  test_size: 0.2
   random_state: 43
 train_params:
   model_type: "LogisticRegression"
