@@ -1,6 +1,7 @@
-from typing import Tuple
 import pandas as pd
+import numpy as np
 
+from typing import Tuple
 from sklearn.model_selection import train_test_split
 
 from ml_project.enities.split_params import SplittingParams
@@ -20,3 +21,8 @@ def split_train_test_data(
         shuffle=params.shuffle
     )
     return train_data, test_data
+
+def predict_to_csv(target: np.ndarray, path: str) -> str:
+    df = pd.Series(target)
+    df.to_csv(path)
+    return path

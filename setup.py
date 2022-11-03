@@ -13,7 +13,8 @@ setup(
     author="Ilya Popov",
     entry_points={
         "console_scripts": [
-            "ml_project_train = ml_project.train_pipeline:train_pipeline_command"
+            "ml_project_train = ml_project.train_pipeline:train_pipeline_command",
+            "ml_project_predict = ml_project.predict_pipeline:predict_pipeline_command"
         ]
     },
     install_requires=required,

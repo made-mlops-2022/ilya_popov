@@ -51,4 +51,9 @@ def serialize_model(model: object, output: str) -> str:
     with open(output, "wb") as f:
         pickle.dump(model, f)
     return output
+
+def deserialize_model(input: str) -> object:
+    with open(input, "rb") as f:
+        model = pickle.load(f)
+    return model
     
