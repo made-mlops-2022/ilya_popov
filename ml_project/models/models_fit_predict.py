@@ -32,6 +32,7 @@ def train_model(
 
     return model.fit(features, target)
 
+
 def predict_model(features: pd.DataFrame, model: Pipeline) -> pd.Series:
     return model.predict(features)
 
@@ -43,6 +44,7 @@ def evaluate_metrics(true: pd.Series, predicted: pd.Series) -> Dict[str, float]:
         "NLLLoss": log_loss(true, predicted)
     }
 
+
 def make_model_pipeline(model: ClassifierModel, transformer: ColumnTransformer) -> Pipeline:
     return Pipeline([("feature_part", transformer), ("model_part", model)])
 
@@ -51,6 +53,7 @@ def serialize_model(model: object, output: str) -> str:
     with open(output, "wb") as f:
         pickle.dump(model, f)
     return output
+
 
 def deserialize_model(input: str) -> object:
     with open(input, "rb") as f:

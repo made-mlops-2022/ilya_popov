@@ -36,5 +36,6 @@ def build_numerical_pipeline() -> Pipeline:
     )
     return num_pipeline
 
+
 def extract_target(data: pd.DataFrame, params: FeatureParams) -> pd.Series:
     return data[params.target_col]

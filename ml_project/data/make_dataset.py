@@ -10,6 +10,7 @@ from ml_project.enities.split_params import SplittingParams
 def make_dataset(path: str) -> pd.DataFrame:
     return pd.read_csv(path)
 
+
 def split_train_test_data(
     data: pd.DataFrame, params: SplittingParams
 ) -> Tuple[pd.DataFrame, pd.DataFrame]:
@@ -21,6 +22,7 @@ def split_train_test_data(
         shuffle=params.shuffle
     )
     return train_data, test_data
+
 
 def predict_to_csv(target: np.ndarray, path: str) -> str:
     df = pd.Series(target)
