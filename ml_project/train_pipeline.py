@@ -1,7 +1,8 @@
 import json
-import click
 import logging
 import sys
+
+import click
 
 from ml_project.data.make_dataset import (
     download_files,

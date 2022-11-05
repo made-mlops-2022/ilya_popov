@@ -1,6 +1,7 @@
-import click
 import logging
 import sys
+
+import click
 
 from ml_project.enities.predict_pipeline_params import (
     read_predict_pipeline_params,

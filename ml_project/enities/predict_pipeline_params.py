@@ -1,6 +1,7 @@
+from dataclasses import dataclass
+
 import yaml
 
-from dataclasses import dataclass
 from marshmallow_dataclass import class_schema
 
 

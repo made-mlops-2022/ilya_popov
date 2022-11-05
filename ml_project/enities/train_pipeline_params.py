@@ -1,7 +1,8 @@
-import yaml
-
 from dataclasses import dataclass
 from typing import Optional
+
+import yaml
+
 from marshmallow_dataclass import class_schema
 
 from ml_project.enities.download_params import DownloadParams

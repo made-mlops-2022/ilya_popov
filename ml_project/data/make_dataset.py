@@ -43,8 +43,8 @@ def download_file(
 ) -> NoReturn:
     request = service.files().get_media(fileId=file_id)
 
-    with open(path, "wb") as download_file:
-        downloader = MediaIoBaseDownload(download_file, request)
+    with open(path, "wb") as file:
+        downloader = MediaIoBaseDownload(file, request)
         done = False
         while done is False:
             status, done = downloader.next_chunk()

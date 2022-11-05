@@ -1,9 +1,9 @@
 import unittest
 import os
 
-import numpy as np
-
 from tempfile import TemporaryDirectory
+
+import numpy as np
 
 from ml_project.data.make_dataset import (
     make_dataset,

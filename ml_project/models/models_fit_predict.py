@@ -1,7 +1,7 @@
-import pandas as pd
+from typing import Dict, Union
 import pickle
 
-from typing import Dict, Union
+import pandas as pd
 
 from sklearn.linear_model import LogisticRegression, SGDClassifier
 from sklearn.metrics import f1_score, roc_auc_score, log_loss
