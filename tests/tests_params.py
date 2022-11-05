@@ -42,3 +42,10 @@ class TestTrainingPipelineParams:
     use_mlflow: bool = False
     mlflow_uri: str = "Not Implemented"
     mlflow_experiment: str = "Not Implemented"
+
+
+@dataclass
+class TestPredictPipelineParams:
+    input_data_path: str = "tests/predict_data_sample.csv"
+    input_model_path: str = "models/model.pkl"
+    output_data_path: str = ""
