@@ -16,16 +16,18 @@ ClassifierModel = Union[LogisticRegression, SGDClassifier, XGBClassifier]
 
 
 def train_model(
-    features: pd.DataFrame,
-    target: pd.Series,
-    training_params: TrainingParams
+    features: pd.DataFrame, target: pd.Series, training_params: TrainingParams
 ) -> ClassifierModel:
     match training_params.model_type:
         case "LogisticRegression":
-            model = LogisticRegression(random_state=training_params.random_state, n_jobs=training_params.n_jobs)
-        
+            model = LogisticRegression(
+                random_state=training_params.random_state, n_jobs=training_params.n_jobs
+            )
+
         case "SGDClassifier":
-            model = SGDClassifier(random_state=training_params.random_state, n_jobs=training_params.n_jobs)
+            model = SGDClassifier(
+                random_state=training_params.random_state, n_jobs=training_params.n_jobs
+            )
 
         case "XGBClassifier":
             model = XGBClassifier()
@@ -41,11 +43,13 @@ def evaluate_metrics(true: pd.Series, predicted: pd.Series) -> Dict[str, float]:
     return {
         "F1": f1_score(true, predicted),
         "RocAuc": roc_auc_score(true, predicted),
-        "NLLLoss": log_loss(true, predicted)
+        "NLLLoss": log_loss(true, predicted),
     }
 
 
-def make_model_pipeline(model: ClassifierModel, transformer: ColumnTransformer) -> Pipeline:
+def make_model_pipeline(
+    model: ClassifierModel, transformer: ColumnTransformer
+) -> Pipeline:
     return Pipeline([("feature_part", transformer), ("model_part", model)])
 
 
@@ -59,4 +63,3 @@ def deserialize_model(input: str) -> object:
     with open(input, "rb") as f:
         model = pickle.load(f)
     return model
-    

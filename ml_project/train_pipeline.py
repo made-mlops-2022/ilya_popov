@@ -3,10 +3,27 @@ import click
 import logging
 import sys
 
-from ml_project.data.make_dataset import make_dataset, split_train_test_data
-from ml_project.enities.train_pipeline_params import TrainingPipelineParams, read_training_pipeline_params
-from ml_project.features.build_features import build_transformer, extract_target, make_features
-from ml_project.models.models_fit_predict import evaluate_metrics, make_model_pipeline, predict_model, serialize_model, train_model
+from ml_project.data.make_dataset import (
+    download_files,
+    make_dataset,
+    split_train_test_data,
+)
+from ml_project.enities.train_pipeline_params import (
+    TrainingPipelineParams,
+    read_training_pipeline_params,
+)
+from ml_project.features.build_features import (
+    build_transformer,
+    extract_target,
+    make_features,
+)
+from ml_project.models.models_fit_predict import (
+    evaluate_metrics,
+    make_model_pipeline,
+    predict_model,
+    serialize_model,
+    train_model,
+)
 
 
 logger = logging.getLogger(__name__)
@@ -23,14 +40,20 @@ def train_pipeline(config_path: str):
 
 def run_train_pipeline(training_params: TrainingPipelineParams):
     logger.info(f"Start train pipeline with params: {training_params}")
+
+    if training_params.downloading_params:
+        download_files(training_params.downloading_params, logger)
+
     data = make_dataset(training_params.input_data_path)
     logger.info(f"Data shape = {data.shape}")
-    train_data, test_data = split_train_test_data(data, training_params.splitting_params)
+    train_data, test_data = split_train_test_data(
+        data, training_params.splitting_params
+    )
 
     logger.info(f"Extracting target: {training_params.feature_params.target_col}")
     y_train = extract_target(train_data, training_params.feature_params)
     y_test = extract_target(test_data, training_params.feature_params)
-    
+
     x_train = train_data.drop(columns=training_params.feature_params.target_col)
     x_test = test_data.drop(columns=training_params.feature_params.target_col)
     logger.info(f"X train shape = {x_train.shape}, X test shape = {x_test.shape}")

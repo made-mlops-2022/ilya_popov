@@ -2,7 +2,10 @@ import click
 import logging
 import sys
 
-from ml_project.enities.predict_pipeline_params import read_predict_pipeline_params, PredictPipelineParams
+from ml_project.enities.predict_pipeline_params import (
+    read_predict_pipeline_params,
+    PredictPipelineParams,
+)
 from ml_project.data.make_dataset import make_dataset, predict_to_csv
 from ml_project.models.models_fit_predict import deserialize_model, predict_model
 

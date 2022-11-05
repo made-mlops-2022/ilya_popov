@@ -22,20 +22,19 @@ numerical_features = [
     "thal",
 ]
 
+
 @dataclass()
 class TestTrainingPipelineParams:
     input_data_path: str = "tests/train_data_sample.csv"
     output_model_path: str = ""
     metric_path: str = ""
     splitting_params: SplittingParams = SplittingParams(
-        test_size=0.3,
-        random_state=40,
-        shuffle=False
+        test_size=0.3, random_state=40, shuffle=False
     )
     feature_params: FeatureParams = FeatureParams(
         numerical_features=numerical_features,
         features_to_drop=None,
-        target_col="condition"
+        target_col="condition",
     )
     train_params: TrainingParams = TrainingParams(random_state=40)
     downloading_params: DownloadParams = None

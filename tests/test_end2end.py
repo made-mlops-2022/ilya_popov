@@ -10,7 +10,7 @@ from ml_project.train_pipeline import run_train_pipeline
 
 class TestEnd2End(unittest.TestCase):
     training_pipeline_params = TestTrainingPipelineParams()
-    
+
     def test_end2end(self):
         with TemporaryDirectory() as tempdir:
             expected_model_path = f"{tempdir}/model.pkl"

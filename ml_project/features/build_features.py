@@ -31,7 +31,7 @@ def build_numerical_pipeline() -> Pipeline:
     num_pipeline = Pipeline(
         [
             ("impute", SimpleImputer(missing_values=np.nan, strategy="mean")),
-            ("scale", StandardScaler())
+            ("scale", StandardScaler()),
         ]
     )
     return num_pipeline

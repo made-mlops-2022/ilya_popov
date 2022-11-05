@@ -1,8 +1,9 @@
 from dataclasses import dataclass
+from typing import List
 
 
 @dataclass
 class DownloadParams:
-    paths: list[str]
+    service_account_file: str
+    scopes: List[str]
     output_folder: str
-    s3_bucket: str

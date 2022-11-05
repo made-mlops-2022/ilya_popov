@@ -2,10 +2,9 @@ input_data_path: "data/raw/heart_cleveland_upload.csv"
 output_model_path: "models/model.pkl"
 metric_path: "models/metrics.json"
 downloading_params:
-  s3_bucket: for-dvc
-  paths:
-    - train.csv
-    - test.csv
+  service_account_file: "configs/google_drive_key.json"
+  scopes: 
+    - "https://www.googleapis.com/auth/drive.readonly"
   output_folder: "data/raw/"
 splitting_params:
   test_size: 0.2
