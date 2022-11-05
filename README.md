@@ -1,20 +1,26 @@
 # ilya_popov
 
+TECHNOPARK, ML-21
+
 MLOps HW1
 ==============================
 
 Installation: 
 ~~~
-
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+python setup.py install
 ~~~
 Usage:
 ~~~
-
+ml_project_train configs/train_config.yaml
+ml_project_predict configs/predict_config.yaml
 ~~~
-
 Test:
 ~~~
-
+python -m unittest 
 ~~~
 
 Project Organization
@@ -61,9 +67,3 @@ Project Organization
 --------
 
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
-
-
-DOCKER:
-~~~
-
-~~~

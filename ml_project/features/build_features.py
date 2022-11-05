@@ -5,7 +5,7 @@ import numpy as np
 from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
 from sklearn.compose import ColumnTransformer
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
 
 from ml_project.enities.feature_params import FeatureParams
 
@@ -19,7 +19,7 @@ def build_transformer(params: FeatureParams) -> ColumnTransformer:
         [
             (
                 "numerical_pipeline",
-                build_numerical_pipeline(),
+                build_numerical_pipeline(params.scaler),
                 params.numerical_features,
             ),
         ]
@@ -27,11 +27,17 @@ def build_transformer(params: FeatureParams) -> ColumnTransformer:
     return transformer
 
 
-def build_numerical_pipeline() -> Pipeline:
+def build_numerical_pipeline(scaler_type: str) -> Pipeline:
+    match scaler_type:
+        case "MinMax":
+            scaler = MinMaxScaler()
+        case "Standart":
+            scaler = StandardScaler()
+
     num_pipeline = Pipeline(
         [
             ("impute", SimpleImputer(missing_values=np.nan, strategy="mean")),
-            ("scale", StandardScaler()),
+            ("scale", scaler),
         ]
     )
     return num_pipeline

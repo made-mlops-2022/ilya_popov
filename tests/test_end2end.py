@@ -2,6 +2,7 @@ import unittest
 import os
 
 from tempfile import TemporaryDirectory
+from unittest.mock import patch
 
 from tests.tests_params import TestTrainingPipelineParams
 
@@ -19,7 +20,8 @@ class TestEnd2End(unittest.TestCase):
             expected_metric_path = f"{tempdir}/metrics.json"
             self.training_pipeline_params.metric_path = expected_metric_path
 
-            path_to_model, metrics = run_train_pipeline(self.training_pipeline_params)
+            with patch("ml_project.train_pipeline.logger"):
+                path_to_model, metrics = run_train_pipeline(self.training_pipeline_params)
 
             self.assertTrue(os.path.exists(path_to_model))
             self.assertTrue(metrics["F1"] > 0)
