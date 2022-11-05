@@ -32,6 +32,7 @@ class TestTrainingPipelineParams:
         test_size=0.3, random_state=40, shuffle=False
     )
     feature_params: FeatureParams = FeatureParams(
+        scaler="Standart",
         numerical_features=numerical_features,
         features_to_drop=None,
         target_col="condition",
