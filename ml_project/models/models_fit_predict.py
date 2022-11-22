@@ -32,6 +32,9 @@ def train_model(
         case "XGBClassifier":
             model = XGBClassifier()
 
+        case _:
+            raise ValueError(f"Unexpected model type: {training_params.model_type}")
+
     return model.fit(features, target)
 
 

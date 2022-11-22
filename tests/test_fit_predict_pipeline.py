@@ -10,7 +10,7 @@ from ml_project.train_pipeline import run_train_pipeline
 from ml_project.predict_pipeline import run_predict_pipeline
 
 
-class TestEnd2End(unittest.TestCase):
+class TestFitPredictPipeline(unittest.TestCase):
     training_pipeline_params = TestTrainingPipelineParams()
     predict_pipeline_params = TestPredictPipelineParams()
 
@@ -35,7 +35,7 @@ class TestEnd2End(unittest.TestCase):
             expected_predict_path = f"{tempdir}/predict.csv"
             self.predict_pipeline_params.output_data_path = expected_predict_path
 
-            with patch("ml_project.train_pipeline.logger"):
+            with patch("ml_project.predict_pipeline.logger"):
                 real_predict_path = run_predict_pipeline(self.predict_pipeline_params)
 
             self.assertTrue(os.path.exists(real_predict_path))

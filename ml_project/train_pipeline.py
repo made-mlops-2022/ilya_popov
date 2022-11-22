@@ -43,7 +43,7 @@ def run_train_pipeline(training_params: TrainingPipelineParams):
     logger.info(f"Start train pipeline with params: {training_params}")
 
     if training_params.downloading_params:
-        download_files(training_params.downloading_params, logger)
+        download_files(training_params.downloading_params)
 
     data = make_dataset(training_params.input_data_path)
     logger.info(f"Data shape = {data.shape}")

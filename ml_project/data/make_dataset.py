@@ -1,7 +1,8 @@
-from logging import Logger
 from typing import NoReturn, Tuple
 from urllib.error import HTTPError
 
+import sys
+import logging
 import pandas as pd
 import numpy as np
 
@@ -15,7 +16,13 @@ from ml_project.enities.download_params import DownloadParams
 from ml_project.enities.split_params import SplittingParams
 
 
-def download_files(params: DownloadParams, logger: Logger) -> NoReturn:
+logger = logging.getLogger(__name__)
+handler = logging.StreamHandler(sys.stdout)
+logger.setLevel(logging.INFO)
+logger.addHandler(handler)
+
+
+def download_files(params: DownloadParams) -> NoReturn:
     try:
         service = make_service(params)
         result = service.files().list(fields="files(id, name)").execute()
@@ -26,7 +33,7 @@ def download_files(params: DownloadParams, logger: Logger) -> NoReturn:
             logger.info(f"Downloading file: {filename}")
 
             path = f"{params.output_folder}{filename}"
-            download_file(path, file_id, service, logger)
+            download_file(path, file_id, service)
     except HTTPError as error:
         logger.error(f"An error is occurred: {error}")
 
@@ -38,9 +45,7 @@ def make_service(params: DownloadParams) -> Resource:
     return build("drive", "v3", credentials=credentials)
 
 
-def download_file(
-    path: str, file_id: str, service: Resource, logger: Logger
-) -> NoReturn:
+def download_file(path: str, file_id: str, service: Resource) -> NoReturn:
     request = service.files().get_media(fileId=file_id)
 
     with open(path, "wb") as file:
