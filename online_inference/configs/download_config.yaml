@@ -1,0 +1,8 @@
+download_params:
+  service_account_file: "configs/google_drive_key.json"
+  scopes: 
+    - "https://www.googleapis.com/auth/drive.readonly"
+  filenames:
+    - "model.pkl"
+  output_folder: "models/"
+model_path: "models/model.pkl"
