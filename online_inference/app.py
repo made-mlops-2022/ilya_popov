@@ -11,6 +11,7 @@ from entities.online_inference_params import read_online_inference_params
 from entities.request_response import ConditionRequest, ConditionResponse
 from download_model import download_files
 
+DEFAULT_CONFIG = "online_inference/configs/model_path.yaml"
 
 logger = logging.getLogger(__name__)
 
@@ -25,7 +26,7 @@ def make_pridict(data: list, feature_names: list[str], model: Pipeline) -> list:
     predicts = model.predict(features)
     response = [
         ConditionResponse(condition=condition)
-        for _, condition in predicts.items()
+        for condition in predicts
     ]
     return response
 
@@ -37,13 +38,13 @@ model = None
 @app.on_event("startup")
 def load_model():
     global model
-    config_path = os.getenv("CONFIG_PATH")
+    config_path = os.getenv("CONFIG_PATH") if os.getenv("CONFIG_PATH") else DEFAULT_CONFIG
     params = read_online_inference_params(config_path)
 
-    if params.download_params is None:
-        model = load_object(params.model_path)
-    else:
-        model = download_files(params.download_params)
+    if params.download_params is not None:
+        download_files(params.download_params)
+
+    model = load_object(params.model_path)
 
 
 @app.get("/")
