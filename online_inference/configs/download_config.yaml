@@ -4,5 +4,5 @@ download_params:
     - "https://www.googleapis.com/auth/drive.readonly"
   filenames:
     - "model.pkl"
-  output_folder: "models/"
-model_path: "models/model.pkl"
+  output_folder: "online_inference/models/"
+model_path: "online_inference/models/model.pkl"

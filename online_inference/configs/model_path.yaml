@@ -1,1 +1,1 @@
-model_path: "models/model.pkl"
+model_path: "online_inference/models/model.pkl"
