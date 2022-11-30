@@ -10,11 +10,17 @@ with DAG(
     schedule_interval="@daily",
 ) as dag:
     generate_data = DockerOperator(
-        image="data-generator",
+        image="airflow-data-generator",
         command="/data/raw/{{ ds }} -c 100",
         network_mode="bridge",
         task_id="docker-data-generator",
         do_xcom_push=False,
         mount_tmp_dir=False,
-        mounts=[Mount(source="/home/ilya0100/documents/MLOps/ilya_popov/data/", target="/data", type='bind')]
+        mounts=[
+            Mount(
+                source="/home/ilya0100/documents/MLOps/ilya_popov/airflow/data/",
+                target="/data",
+                type="bind",
+            )
+        ],
     )

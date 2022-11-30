@@ -71,11 +71,10 @@ def generate_data(num_rows: int = 10) -> pd.DataFrame:
 @click.argument("output_dir")
 @click.option("-c", "--count", default=10, help="Number of rows in the dataset")
 def generate_command(output_dir: str, count: int = 10):
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir, mode=0o777)
+    os.makedirs(output_dir, exist_ok=True)
 
     data = generate_data(count)
-    data.to_csv(os.path.join(output_dir, "data.csv"))
+    data.to_csv(os.path.join(output_dir, "data.csv"), index=False)
 
 
 if __name__ == "__main__":

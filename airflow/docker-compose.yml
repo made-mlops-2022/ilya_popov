@@ -2,7 +2,7 @@
 x-environment: &airflow_environment
   - AIRFLOW__CORE__EXECUTOR=LocalExecutor
   - AIRFLOW__CORE__LOAD_DEFAULT_CONNECTIONS=False
-  - AIRFLOW__CORE__LOAD_EXAMPLES=True
+  - AIRFLOW__CORE__LOAD_EXAMPLES=False
   - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql://airflow:airflow@postgres:5432/airflow
   - AIRFLOW__CORE__STORE_DAG_CODE=True
   - AIRFLOW__CORE__STORE_SERIALIZED_DAGS=True
@@ -77,27 +77,32 @@ services:
   generate_dataset:
     build:
       context: images/data-generator
-    image: data-generator
+    image: airflow-data-generator
     restart: "no"
 
-#   predict:
-#     build:
-#       context: images/airflow-predict
-#     image: airflow-predict
-#     restart: "no"
+  preprocess:
+    build:
+      context: images/train-pipeline/preprocess
+    image: airflow-preprocess
+    restart: "no"
 
-#   download:
-#     build:
-#       context: images/airflow-download
-#     image: airflow-download
-#     restart: "no"
+  split-data:
+    build:
+      context: images/train-pipeline/train-test-split
+    image: airflow-split-data
+    restart: "no"
 
+  train-model:
+    build:
+      context: images/train-pipeline/train-model
+    image: airflow-train-model
+    restart: "no"
 
-#   preprocess:
-#     build:
-#       context: images/airflow-preprocess
-#     image: airflow-preprocess
-#     restart: "no"
+  val-model:
+    build:
+      context: images/train-pipeline/val-model
+    image: airflow-val-model
+    restart: "no"
 
 volumes:
   logs:
