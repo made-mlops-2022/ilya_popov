@@ -1,6 +1,15 @@
-чтобы развернуть airflow, предварительно собрав контейнеры
+TECHNOPARK, ML-21
+==============================
+
+Before the first run, you need to build the base image:
 ~~~
-# для корректной работы с переменными, созданными из UI
-export FERNET_KEY=$(python -c "from cryptography.fernet import Fernet; FERNET_KEY = Fernet.generate_key().decode(); print(FERNET_KEY)")
-docker compose up --build
+docker build -t airflow-base:latest images/airflow-base/
 ~~~
+Usage:
+~~~
+./run.sh
+~~~
+
+Airflow url: http://localhost:8080/  
+Login: admin  
+Password: admin
