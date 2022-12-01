@@ -6,7 +6,7 @@ from docker.types import Mount
 
 with DAG(
     dag_id="train_pipeline",
-    start_date=days_ago(1),
+    start_date=days_ago(7),
     schedule_interval="@weekly",
 ) as dag:
     preprocess_data = DockerOperator(

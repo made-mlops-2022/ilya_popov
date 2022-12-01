@@ -40,8 +40,8 @@ def split_command(input_dir: str, test_size: float, random_state: int, shuffle: 
         data, test_size, random_state, shuffle
     )
 
-    train_data.to_csv(os.path.join(input_dir, "train_data.csv"))
-    test_data.to_csv(os.path.join(input_dir, "test_data.csv"))
+    train_data.to_csv(os.path.join(input_dir, "train_data.csv"), index=False)
+    test_data.to_csv(os.path.join(input_dir, "test_data.csv"), index=False)
 
 
 if __name__ == "__main__":
