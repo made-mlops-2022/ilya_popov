@@ -20,14 +20,14 @@ def predict_to_csv(target: np.ndarray, path: str) -> str:
 
 @click.command()
 @click.argument("input_data_dir")
-@click.argument("input_model_dir")
+@click.argument("input_model_path")
 @click.argument("output_dir")
-def predict_command(input_data_dir: str, input_model_dir: str, output_dir):
+def predict_command(input_data_dir: str, input_model_path: str, output_dir):
     data = pd.read_csv(os.path.join(input_data_dir, "data.csv"))
     if "condition" in data.columns:
         data.drop(columns="condition", inplace=True)
 
-    model = deserialize_model(os.path.join(input_model_dir, "model.pkl"))
+    model = deserialize_model(input_model_path)
     predicts = model.predict(data)
 
     os.makedirs(output_dir, exist_ok=True)

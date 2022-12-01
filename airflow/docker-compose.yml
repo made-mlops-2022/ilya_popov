@@ -8,6 +8,7 @@ x-environment: &airflow_environment
   - AIRFLOW__CORE__STORE_SERIALIZED_DAGS=True
   - AIRFLOW__WEBSERVER__EXPOSE_CONFIG=True
   - AIRFLOW__CORE__FERNET_KEY=${FERNET_KEY}
+  - AIRFLOW_VAR_LOCAL_DATA_DIR=${LOCAL_DATA_DIR}
 
 
 x-airflow-image: &airflow_image apache/airflow:2.3.0-python3.8

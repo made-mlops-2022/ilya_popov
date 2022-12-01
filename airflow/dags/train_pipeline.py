@@ -1,7 +1,11 @@
 from airflow import DAG
 from airflow.providers.docker.operators.docker import DockerOperator
 from airflow.utils.dates import days_ago
+from airflow.models import Variable
 from docker.types import Mount
+
+
+LOCAL_DATA_DIR = Variable.get("LOCAL_DATA_DIR")
 
 
 with DAG(
@@ -18,7 +22,7 @@ with DAG(
         mount_tmp_dir=False,
         mounts=[
             Mount(
-                source="/home/ilya0100/documents/MLOps/ilya_popov/airflow/data/",
+                source=LOCAL_DATA_DIR,
                 target="/data",
                 type="bind",
             )
@@ -34,7 +38,7 @@ with DAG(
         mount_tmp_dir=False,
         mounts=[
             Mount(
-                source="/home/ilya0100/documents/MLOps/ilya_popov/airflow/data/",
+                source=LOCAL_DATA_DIR,
                 target="/data",
                 type="bind",
             )
@@ -50,7 +54,7 @@ with DAG(
         mount_tmp_dir=False,
         mounts=[
             Mount(
-                source="/home/ilya0100/documents/MLOps/ilya_popov/airflow/data/",
+                source=LOCAL_DATA_DIR,
                 target="/data",
                 type="bind",
             )
@@ -66,7 +70,7 @@ with DAG(
         mount_tmp_dir=False,
         mounts=[
             Mount(
-                source="/home/ilya0100/documents/MLOps/ilya_popov/airflow/data/",
+                source=LOCAL_DATA_DIR,
                 target="/data",
                 type="bind",
             )
