@@ -1,0 +1,30 @@
+input_data_path: "data/raw/heart_cleveland_upload.csv"
+output_model_path: "models/model.pkl"
+metric_path: "models/metrics.json"
+downloading_params:
+  service_account_file: "configs/google_drive_key.json"
+  scopes: 
+    - "https://www.googleapis.com/auth/drive.readonly"
+  output_folder: "data/raw/"
+splitting_params:
+  test_size: 0.2
+  random_state: 43
+train_params:
+  model_type: "LogisticRegression"
+feature_params:
+  scaler: "Standart"
+  numerical_features:
+    - "age"
+    - "sex"
+    - "cp"
+    - "trestbps"
+    - "chol"
+    - "fbs"
+    - "restecg"
+    - "thalach"
+    - "exang"
+    - "oldpeak"
+    - "slope"
+    - "ca"
+    - "thal"
+  target_col: "condition"
